@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#17110f" />
+  <title>A little flower for today</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Dia dos Namorados</p>
+      <h1 id="page-title">A little flower, a few little truths.</h1>
+      <p class="intro">
+        Tap a petal. Nothing loud. Just something soft I made for you.
+      </p>
+    </section>
+
+    <section class="flower-stage" aria-label="Interactive protea flower">
+      <div class="flower-wrap" id="flowerWrap">
+        <svg class="protea" viewBox="0 0 520 640" role="img" aria-labelledby="flower-title flower-desc">
+          <title id="flower-title">Interactive protea sketch</title>
+          <desc id="flower-desc">A hand-drawn style protea. Each petal can be selected to reveal a note.</desc>
+
+          <defs>
+            <filter id="sketch">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="8" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.15"/>
+            </filter>
+
+            <linearGradient id="petalShade" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="currentColor" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="currentColor" stop-opacity=".45"/>
+            </linearGradient>
+          </defs>
+
+          <g class="stem-lines" filter="url(#sketch)" aria-hidden="true">
+            <path d="M262 379 C255 440, 243 520, 245 620" />
+            <path d="M274 382 C281 445, 285 525, 280 620" />
+            <path d="M250 504 C214 493, 184 475, 156 444" />
+            <path d="M278 524 C317 505, 353 475, 383 436" />
+          </g>
+
+          <g class="leaves" filter="url(#sketch)" aria-hidden="true">
+            <path d="M160 444 C204 443, 232 470, 248 505 C204 501, 178 481, 160 444Z" />
+            <path d="M382 436 C338 440, 300 479, 277 525 C333 513, 365 481, 382 436Z" />
+          </g>
+
+          <g class="petals" filter="url(#sketch)">
+            <button class="petal-button" data-petal="0" aria-label="Open petal 1 note">
+              <path class="petal petal-1" d="M260 98 C222 154, 222 238, 263 316 C307 238, 305 155, 260 98Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="1" aria-label="Open petal 2 note">
+              <path class="petal petal-2" d="M208 116 C183 179, 204 256, 257 323 C278 241, 264 164, 208 116Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="2" aria-label="Open petal 3 note">
+              <path class="petal petal-3" d="M314 116 C335 181, 317 259, 263 323 C241 240, 258 164, 314 116Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="3" aria-label="Open petal 4 note">
+              <path class="petal petal-4" d="M158 169 C158 236, 198 300, 257 340 C250 257, 220 196, 158 169Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="4" aria-label="Open petal 5 note">
+              <path class="petal petal-5" d="M365 169 C363 236, 323 300, 263 340 C270 257, 301 196, 365 169Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="5" aria-label="Open petal 6 note">
+              <path class="petal petal-6" d="M119 253 C151 305, 204 340, 260 359 C226 292, 185 253, 119 253Z"/>
+            </button>
+
+            <button class="petal-button" data-petal="6" aria-label="Open petal 7 note">
+              <path class="petal petal-7" d="M404 253 C372 305, 319 340, 263 359 C297 292, 338 253, 404 253Z"/>
+            </button>
+          </g>
+
+          <g class="core" filter="url(#sketch)" aria-hidden="true">
+            <path d="M208 327 C235 298, 288 299, 315 327 C308 368, 284 391, 262 395 C237 391, 215 367, 208 327Z" />
+            <path d="M230 331 C248 318, 278 318, 296 331" />
+            <path d="M223 351 C247 338, 278 338, 302 351" />
+            <path d="M232 371 C250 362, 274 362, 292 371" />
+          </g>
+
+          <button class="secret-stem" id="secretStem" aria-label="Secret stem button">
+            <path d="M262 395 C262 470, 263 545, 262 622" />
+          </button>
+        </svg>
+
+        <div class="hint">tap petals · press the stem 3 times</div>
+      </div>
+
+      <article class="note-card" id="noteCard" aria-live="polite">
+        <p class="note-kicker">petal note</p>
+        <h2 id="noteTitle">For today</h2>
+        <p id="noteText">
+          I wanted this to stay small. A quiet flower. A few honest words. A reminder that I see you, I appreciate you, and I’m still choosing tenderness with you.
+        </p>
+        <figure id="photoSlot" class="photo-slot hidden">
+          <img id="notePhoto" src="" alt="" />
+          <figcaption id="photoCaption"></figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <section class="closing">
+      <p>
+        Not a grand thing. Just a careful one.
+        <span>— from me</span>
+      </p>
+    </section>
+  </main>
+
+  <div class="petal-rain" id="petalRain" aria-hidden="true"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
