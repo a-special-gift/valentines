@@ -1,0 +1,1689 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#150d0b" />
+  <title>A little warm corner for you</title>
+
+  <style>
+    :root {
+      --bg: #130c0a;
+      --bg2: #271712;
+      --cream: #fff2dd;
+      --muted: rgba(255, 242, 221, .72);
+      --soft: rgba(255, 242, 221, .10);
+      --line: rgba(255, 242, 221, .16);
+      --gold: #ffbf78;
+      --gold2: #ff8f55;
+      --rose: #d995a2;
+      --rose2: #8d5264;
+      --wood: #704838;
+      --wood2: #3c251d;
+      --blanket: #b48ba5;
+      --blanket2: #7e566d;
+      --shadow: rgba(0,0,0,.38);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 50% 8%, rgba(255, 191, 120, .16), transparent 28rem),
+        radial-gradient(circle at 18% 85%, rgba(217, 149, 162, .12), transparent 22rem),
+        linear-gradient(145deg, var(--bg), var(--bg2) 62%, #0e0908);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.016) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent);
+      z-index: -1;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100% - 18px, 820px);
+      margin: 0 auto;
+      padding: max(14px, env(safe-area-inset-top)) 0 calc(24px + env(safe-area-inset-bottom));
+    }
+
+    .top {
+      text-align: center;
+      padding: 2px 6px 12px;
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: rgba(255, 242, 221, .58);
+      font-size: .68rem;
+      font-weight: 850;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: .98;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 10vw, 4.3rem);
+      text-wrap: balance;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 8.5vw, 3.4rem);
+      text-wrap: balance;
+    }
+
+    h3 {
+      font-size: clamp(1.7rem, 7vw, 2.5rem);
+    }
+
+    p {
+      line-height: 1.62;
+    }
+
+    .subtitle {
+      max-width: 540px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .stage {
+      position: relative;
+      min-height: calc(100svh - 72px);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 52%, rgba(255, 191, 120, .10), transparent 22rem),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      box-shadow: 0 28px 80px var(--shadow);
+      isolation: isolate;
+    }
+
+    .room {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .window {
+      position: absolute;
+      top: 22px;
+      right: 18px;
+      width: 108px;
+      height: 142px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255, 230, 190, .14), transparent 52%),
+        linear-gradient(180deg, #18131e, #09080f);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 18px 42px rgba(0,0,0,.20);
+      overflow: hidden;
+    }
+
+    .window::before,
+    .window::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 242, 221, .12);
+    }
+
+    .window::before { width: 1px; height: 100%; left: 50%; top: 0; }
+    .window::after { height: 1px; width: 100%; left: 0; top: 50%; }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--cream);
+      opacity: .8;
+      box-shadow: 0 0 14px rgba(255,255,255,.55);
+      animation: twinkle 3.5s ease-in-out infinite;
+    }
+
+    .star:nth-child(1) { left: 24%; top: 18%; }
+    .star:nth-child(2) { left: 72%; top: 30%; animation-delay: .6s; }
+    .star:nth-child(3) { left: 34%; top: 68%; animation-delay: 1.2s; }
+    .star:nth-child(4) { left: 78%; top: 74%; animation-delay: 1.8s; }
+
+    .table {
+      position: absolute;
+      left: 50%;
+      top: 430px;
+      width: min(340px, 86%);
+      height: 120px;
+      transform: translateX(-50%);
+      border-radius: 34px 34px 22px 22px;
+      background: linear-gradient(180deg, #704938, #5f3d30);
+      box-shadow: inset 0 -16px 26px rgba(0,0,0,.16), 0 24px 54px rgba(0,0,0,.20);
+    }
+
+    .table::after {
+      content: "";
+      position: absolute;
+      left: 25px;
+      right: 25px;
+      bottom: -12px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.24);
+      filter: blur(10px);
+    }
+
+    .mugs {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      transform: translateY(-22px);
+    }
+
+    .mug {
+      position: relative;
+      width: 78px;
+      height: 64px;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(180deg, #96654e, #6c4534);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: inset 0 -10px 18px rgba(0,0,0,.18);
+      transform-origin: 50% 90%;
+    }
+
+    .mug::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      right: 7px;
+      height: 17px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #6c4332, #4a2d23);
+    }
+
+    .mug::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      right: -15px;
+      width: 22px;
+      height: 30px;
+      border-radius: 999px;
+      border: 5px solid #96654e;
+    }
+
+    .mug-label {
+      position: absolute;
+      top: 74px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 242, 221, .62);
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .mallows {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      width: 52px;
+      height: 16px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 15% 50%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 40% 42%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 64% 58%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 86% 40%, #fffaf0 0 6px, transparent 7px);
+      z-index: 2;
+    }
+
+    .steam {
+      position: absolute;
+      top: -34px;
+      width: 22px;
+      height: 46px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 242, 221, .24);
+      border-color: rgba(255, 242, 221, .24) transparent transparent transparent;
+      animation: steam 3.6s ease-in-out infinite;
+    }
+
+    .steam.one { left: 20px; }
+    .steam.two { right: 18px; animation-delay: .9s; }
+
+    .room.is-cheering .mug:first-child {
+      animation: cheersLeft 1.1s ease-in-out 2;
+    }
+
+    .room.is-cheering .mug:last-child {
+      animation: cheersRight 1.1s ease-in-out 2;
+    }
+
+    .fireplace {
+      position: absolute;
+      left: 50%;
+      top: 166px;
+      width: min(380px, 92%);
+      height: 280px;
+      transform: translateX(-50%);
+    }
+
+    .mantel {
+      position: absolute;
+      top: 0;
+      left: 14px;
+      right: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #6d4a3b, #422920);
+    }
+
+    .brick {
+      position: absolute;
+      top: 14px;
+      left: 34px;
+      right: 34px;
+      bottom: 42px;
+      border-radius: 26px 26px 18px 18px;
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,.03) 50%, transparent 51%),
+        linear-gradient(180deg, #5b3b31, #34211c);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 -20px 28px rgba(0,0,0,.20);
+    }
+
+    .firebox {
+      position: absolute;
+      top: 58px;
+      left: 56px;
+      right: 56px;
+      bottom: 78px;
+      border-radius: 20px 20px 14px 14px;
+      background: #17100f;
+      border: 1px solid rgba(255,255,255,.06);
+      overflow: hidden;
+      transition: box-shadow .4s ease, background .4s ease;
+    }
+
+    .logs {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      width: 92px;
+      height: 22px;
+      transform: translateX(-50%);
+    }
+
+    .logs::before,
+    .logs::after {
+      content: "";
+      position: absolute;
+      width: 58px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7b543c, #493025);
+    }
+
+    .logs::before { left: 0; transform: rotate(13deg); }
+    .logs::after { right: 0; transform: rotate(-13deg); }
+
+    .flame {
+      position: absolute;
+      left: 50%;
+      bottom: 38px;
+      width: 54px;
+      height: 98px;
+      transform: translateX(-50%) scale(.8);
+      opacity: 0;
+      border-radius: 55% 55% 55% 55% / 72% 72% 38% 38%;
+      background: radial-gradient(circle at 50% 78%, #fff2ce 0 18%, #ffc76d 20% 46%, #ff8b4a 50% 72%, transparent 76%);
+      transition: opacity .45s ease, transform .45s ease;
+      animation: flicker 1.25s ease-in-out infinite;
+      will-change: transform, filter;
+    }
+
+    .flame.small {
+      left: calc(50% + 25px);
+      bottom: 43px;
+      width: 38px;
+      height: 70px;
+      animation-delay: .18s;
+    }
+
+    .emberbed {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 8px;
+      height: 22px;
+      opacity: .08;
+      background:
+        radial-gradient(circle at 25% 50%, rgba(255, 139, 74, .75), transparent 28%),
+        radial-gradient(circle at 50% 55%, rgba(255, 207, 120, .65), transparent 24%),
+        radial-gradient(circle at 75% 50%, rgba(255, 139, 74, .65), transparent 28%);
+      filter: blur(3px);
+      transition: opacity .35s ease;
+    }
+
+    .sofa {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 236px;
+      height: 84px;
+      border-radius: 32px 32px 18px 18px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #684439, #402922);
+      box-shadow: 0 20px 48px rgba(0,0,0,.18);
+    }
+
+    .blanket {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      width: 166px;
+      height: 62px;
+      border-radius: 22px 22px 18px 18px;
+      transform: translateX(-50%) translateY(14px);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.08) 0 12%, transparent 12% 24%, rgba(255,255,255,.08) 24% 36%, transparent 36% 48%, rgba(255,255,255,.08) 48% 60%, transparent 60% 72%, rgba(255,255,255,.08) 72% 84%, transparent 84%),
+        linear-gradient(180deg, var(--blanket), var(--blanket2));
+      opacity: 0;
+      transition: opacity .45s ease, transform .45s ease;
+      box-shadow: inset 0 -10px 18px rgba(0,0,0,.14);
+    }
+
+    .cuddle {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      width: 156px;
+      height: 66px;
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+      transition: opacity .45s ease, transform .45s ease;
+      z-index: 2;
+    }
+
+    .head {
+      position: absolute;
+      top: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #d2a17f, #a97455);
+      box-shadow: inset 0 -8px 14px rgba(0,0,0,.10);
+    }
+
+    .head.me { left: 36px; }
+    .head.her { right: 36px; background: linear-gradient(180deg, #c98f76, #8f5c4d); }
+
+    .cuddle-blanket {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 148px;
+      height: 48px;
+      border-radius: 24px 24px 18px 18px;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.08) 0 12%, transparent 12% 24%, rgba(255,255,255,.08) 24% 36%, transparent 36% 48%, rgba(255,255,255,.08) 48% 60%, transparent 60% 72%, rgba(255,255,255,.08) 72% 84%, transparent 84%),
+        linear-gradient(180deg, #b68ba2, #7e566d);
+    }
+
+    .cuddle-heart {
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      transform: translateX(-50%);
+      color: #ffd7d7;
+      font-size: 1.05rem;
+      opacity: 0;
+    }
+
+    .room.is-lit .firebox {
+      background: radial-gradient(circle at 50% 100%, rgba(255, 151, 75, .18), transparent 70%), #1b1110;
+      box-shadow: inset 0 0 84px rgba(255, 139, 74, .15), 0 0 70px rgba(255, 139, 74, .12);
+    }
+
+    .room.is-lit .firebox::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 75%, rgba(255, 191, 120, .10), transparent 65%);
+      animation: fireGlow 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .room.is-lit .flame {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .room.is-lit .emberbed {
+      opacity: .85;
+      animation: emberPulse 2s ease-in-out infinite;
+    }
+
+    .room.is-lit .blanket {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .room.is-cuddled .cuddle {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .room.is-cuddled .cuddle-heart {
+      animation: heartFloat 2.4s ease-in-out infinite;
+    }
+
+    .letter-prop {
+      position: absolute;
+      left: 18px;
+      top: 92px;
+      width: 104px;
+      height: 72px;
+      transform: rotate(-7deg);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f7ead8, #e6ceb2);
+      box-shadow: 0 16px 34px rgba(0,0,0,.22);
+      opacity: .9;
+    }
+
+    .letter-prop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      background: #ead7bd;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .lily-seal-small {
+      position: absolute;
+      left: 50%;
+      top: 23px;
+      width: 31px;
+      height: 31px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #b87986, #8e5360);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      color: #fff9f1;
+      z-index: 2;
+    }
+
+    .panel-wrap {
+      position: absolute;
+      inset: auto 12px 12px;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .panel {
+      width: 100%;
+      max-height: 58svh;
+      overflow-y: auto;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 20px;
+      background: rgba(20, 13, 11, .78);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 70px rgba(0,0,0,.34);
+      pointer-events: auto;
+      transform: translateY(0);
+      opacity: 1;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+
+    .panel.is-hidden {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    .panel p {
+      color: var(--muted);
+      font-size: .95rem;
+      margin: 12px 0 0;
+    }
+
+    .button {
+      appearance: none;
+      border: 1px solid rgba(255, 194, 135, .30);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 194, 135, .22), rgba(255, 194, 135, .10));
+      color: var(--cream);
+      min-height: 48px;
+      padding: 13px 17px;
+      font-weight: 780;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, opacity .2s ease;
+      box-shadow: 0 14px 30px rgba(0,0,0,.16);
+      touch-action: manipulation;
+    }
+
+    .button:hover:not(:disabled),
+    .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(255, 194, 135, .52);
+    }
+
+    .button.full {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .button.alt {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .game-area {
+      position: relative;
+      height: min(34svh, 245px);
+      min-height: 210px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 242, 221, .08), transparent 65%),
+        linear-gradient(180deg, #1e1514, #120d0d);
+      margin-top: 14px;
+      touch-action: none;
+    }
+
+    .game-cup {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      width: 72px;
+      height: 42px;
+      border-radius: 0 0 16px 16px;
+      background: linear-gradient(180deg, #95654e, #704937);
+      border: 1px solid rgba(255,255,255,.10);
+      will-change: left;
+    }
+
+    .game-cup::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: 4px;
+      right: 4px;
+      height: 8px;
+      border-radius: 999px;
+      background: #fff8ed;
+    }
+
+    .game-cup::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: -13px;
+      width: 19px;
+      height: 22px;
+      border-radius: 999px;
+      border: 4px solid #95654e;
+    }
+
+    .falling-mallow {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #fffdf7, #f4eadc);
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,.06);
+      will-change: top;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 58px 1fr 58px;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .92rem;
+      flex-wrap: wrap;
+    }
+
+    .score-row strong {
+      color: var(--cream);
+    }
+
+    .below {
+      padding: 30px 0 0;
+      display: grid;
+      gap: 22px;
+    }
+
+    .flower-section,
+    .letter-section,
+    .movie-section {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+        rgba(20, 13, 11, .55);
+      box-shadow: 0 24px 70px rgba(0,0,0,.30);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .flower-section p,
+    .letter-section p,
+    .movie-section p {
+      color: var(--muted);
+      margin: 12px auto 0;
+      max-width: 560px;
+    }
+
+    .big-lily-wrap {
+      position: relative;
+      width: min(260px, 78vw);
+      height: min(260px, 78vw);
+      margin: 24px auto 8px;
+      display: grid;
+      place-items: center;
+    }
+
+    .big-lily-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 242, 221, .18), rgba(217, 149, 162, .08) 44%, transparent 70%);
+      filter: blur(12px);
+      animation: lilyAura 3s ease-in-out infinite;
+    }
+
+    .big-lily {
+      position: relative;
+      width: 86%;
+      height: 86%;
+      overflow: visible;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,.28));
+      animation: lilyPulse 3s ease-in-out infinite;
+    }
+
+    .big-lily .petal-main {
+      fill: #fff8ed;
+      stroke: rgba(255,255,255,.62);
+      stroke-width: 2;
+    }
+
+    .big-lily .petal-side {
+      fill: #f6dfdc;
+      stroke: rgba(255,255,255,.54);
+      stroke-width: 2;
+    }
+
+    .big-lily .stem {
+      fill: none;
+      stroke: #b7c196;
+      stroke-width: 7;
+      stroke-linecap: round;
+    }
+
+    .big-lily .leaf {
+      fill: rgba(183, 193, 150, .24);
+      stroke: #b7c196;
+      stroke-width: 3;
+      stroke-linejoin: round;
+    }
+
+    .quote {
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255, 242, 221, .07);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.2rem, 5vw, 1.7rem);
+      line-height: 1.35;
+      color: var(--cream) !important;
+    }
+
+    .envelope {
+      position: relative;
+      width: min(280px, 100%);
+      height: 172px;
+      margin: 20px auto 8px;
+      border: 0;
+      padding: 0;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #f7ead8, #e6ceb2);
+      box-shadow: 0 20px 45px rgba(0,0,0,.22);
+      cursor: pointer;
+      transition: transform .2s ease;
+      display: block;
+      touch-action: manipulation;
+    }
+
+    .envelope:hover,
+    .envelope:focus-visible {
+      transform: translateY(-3px);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      border-radius: 24px 24px 0 0;
+      background: #ead7bd;
+      transform-origin: top center;
+      transition: transform .55s ease;
+      z-index: 3;
+    }
+
+    .paper {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 28px;
+      bottom: 18px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffaf1, #f6ebda);
+      transform: translateY(16px);
+      transition: transform .55s ease;
+      z-index: 1;
+    }
+
+    .wax {
+      position: absolute;
+      left: 50%;
+      top: 54px;
+      width: 64px;
+      height: 64px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b87986, #8e5360);
+      display: grid;
+      place-items: center;
+      z-index: 4;
+      box-shadow: 0 12px 22px rgba(0,0,0,.18);
+      animation: pulse 2.2s ease-in-out infinite;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .tiny-lily {
+      width: 44px;
+      height: 44px;
+      overflow: visible;
+    }
+
+    .tiny-lily path {
+      fill: #fff8ee;
+      stroke: rgba(255,255,255,.68);
+      stroke-width: 2.2;
+      stroke-linejoin: round;
+    }
+
+    .tiny-lily .stem {
+      fill: none;
+      stroke: #fff8ee;
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+
+    .letter-section.is-open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .letter-section.is-open .paper {
+      transform: translateY(-36px);
+    }
+
+    .letter-section.is-open .wax {
+      animation: none;
+      opacity: .82;
+      transform: translateX(-50%) scale(.88);
+    }
+
+    .letter {
+      margin-top: 46px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 22px;
+      padding: 20px;
+      background: rgba(255, 242, 221, .08);
+      color: var(--muted);
+      line-height: 1.62;
+    }
+
+    .letter h3 {
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+
+    .signature {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--cream) !important;
+      font-size: 1.22rem !important;
+      margin-top: 18px !important;
+    }
+
+    .movie-options {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      margin-top: 20px;
+    }
+
+    .yay {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 191, 120, .20), transparent 70%),
+        rgba(255,255,255,.06);
+    }
+
+    .yay.is-visible {
+      display: block;
+      animation: yayPop .45s ease both;
+    }
+
+    .yay strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 10vw, 3.5rem);
+      color: var(--cream);
+      text-shadow: 0 0 24px rgba(255, 191, 120, .22);
+    }
+
+    .blush {
+      display: inline-grid;
+      place-items: center;
+      margin-top: 12px;
+      width: 74px;
+      height: 74px;
+      border-radius: 999px;
+      background: #ffd79b;
+      color: #5b352b;
+      font-size: 2.1rem;
+      box-shadow: 0 16px 36px rgba(0,0,0,.22);
+      animation: blushBounce 1.6s ease-in-out infinite;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .spark,
+    .heart-confetti,
+    .floating-ember {
+      position: fixed;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .spark {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 202, 109, .92);
+      box-shadow: 0 0 14px rgba(255, 202, 109, .45);
+      animation: spark 1.8s ease-out forwards;
+    }
+
+    .heart-confetti {
+      color: #ffd5dc;
+      font-size: 1rem;
+      animation: heartFall 2.4s ease-out forwards;
+    }
+
+    .floating-ember {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 184, 96, .78);
+      box-shadow: 0 0 12px rgba(255, 184, 96, .32);
+      animation: emberRise 2.6s ease-out forwards;
+      z-index: 8;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .42; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.22); }
+    }
+
+    @keyframes steam {
+      0%, 100% { opacity: .16; transform: translateY(10px) scale(.96); }
+      50% { opacity: .36; transform: translateY(-8px) scale(1.04); }
+    }
+
+    @keyframes cheersLeft {
+      0%, 100% { transform: rotate(0) translate(0,0); }
+      45%, 60% { transform: rotate(14deg) translate(20px,-8px); }
+    }
+
+    @keyframes cheersRight {
+      0%, 100% { transform: rotate(0) translate(0,0); }
+      45%, 60% { transform: rotate(-14deg) translate(-20px,-8px); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { filter: saturate(1); transform: translateX(-50%) scale(1); }
+      35% { filter: saturate(1.16); transform: translateX(-50%) scale(1.05) skewX(-1deg); }
+      70% { filter: saturate(1.08); transform: translateX(-50%) scale(.98) skewX(1deg); }
+    }
+
+    @keyframes fireGlow {
+      0%, 100% { opacity: .35; transform: scale(.96); }
+      50% { opacity: .75; transform: scale(1.06); }
+    }
+
+    @keyframes emberPulse {
+      0%, 100% { opacity: .45; }
+      50% { opacity: .9; }
+    }
+
+    @keyframes heartFloat {
+      0%, 100% { opacity: .15; transform: translateX(-50%) translateY(6px) scale(.92); }
+      50% { opacity: .94; transform: translateX(-50%) translateY(-8px) scale(1.08); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 12px 22px rgba(0,0,0,.18), 0 0 0 0 rgba(255, 248, 238, .18); }
+      50% { box-shadow: 0 12px 22px rgba(0,0,0,.18), 0 0 0 12px rgba(255, 248, 238, 0); }
+    }
+
+    @keyframes lilyAura {
+      0%, 100% { opacity: .45; transform: scale(.92); }
+      50% { opacity: .92; transform: scale(1.08); }
+    }
+
+    @keyframes lilyPulse {
+      0%, 100% { transform: translateY(0) scale(.98); }
+      50% { transform: translateY(-5px) scale(1.03); }
+    }
+
+    @keyframes spark {
+      0% { opacity: 1; transform: translate3d(0,0,0) scale(1); }
+      100% { opacity: 0; transform: translate3d(var(--x), -130px, 0) scale(0); }
+    }
+
+    @keyframes emberRise {
+      0% { opacity: .9; transform: translate3d(0,0,0) scale(.8); }
+      100% { opacity: 0; transform: translate3d(var(--x), -140px, 0) scale(.1); }
+    }
+
+    @keyframes heartFall {
+      0% { opacity: 1; transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translate3d(var(--x), 130px, 0) rotate(280deg) scale(.5); }
+    }
+
+    @keyframes yayPop {
+      from { opacity: 0; transform: translateY(12px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes blushBounce {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-5px) rotate(2deg); }
+    }
+
+    @media (min-width: 700px) {
+      .page {
+        width: min(1120px, calc(100% - 34px));
+        padding-top: 30px;
+      }
+
+      .stage {
+        min-height: 720px;
+      }
+
+      .window {
+        width: 156px;
+        height: 204px;
+        right: 56px;
+        top: 34px;
+      }
+
+      .table {
+        top: 244px;
+        width: min(540px, 82%);
+        height: 146px;
+      }
+
+      .mugs {
+        gap: 92px;
+        transform: translateY(-28px);
+      }
+
+      .mug {
+        width: 110px;
+        height: 84px;
+        border-radius: 0 0 28px 28px;
+      }
+
+      .mug::before {
+        height: 22px;
+        left: 9px;
+        right: 9px;
+      }
+
+      .mug::after {
+        top: 20px;
+        right: -20px;
+        width: 30px;
+        height: 44px;
+        border-width: 6px;
+      }
+
+      .mallows {
+        width: 70px;
+        height: 22px;
+      }
+
+      .mug-label {
+        top: 96px;
+        font-size: .88rem;
+      }
+
+      .fireplace {
+        top: auto;
+        bottom: 55px;
+        width: min(470px, 86%);
+        height: 270px;
+      }
+
+      .firebox {
+        top: 66px;
+        left: 94px;
+        right: 94px;
+        bottom: 72px;
+      }
+
+      .sofa {
+        width: 270px;
+        height: 92px;
+      }
+
+      .blanket {
+        width: 178px;
+        height: 68px;
+      }
+
+      .cuddle {
+        bottom: 28px;
+      }
+
+      .letter-prop {
+        left: 62px;
+        top: auto;
+        bottom: 104px;
+        width: 164px;
+        height: 108px;
+      }
+
+      .lily-seal-small {
+        top: 36px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+      }
+
+      .panel-wrap {
+        inset: 28px auto auto 28px;
+        width: min(420px, calc(100% - 56px));
+      }
+
+      .panel {
+        max-height: calc(720px - 56px);
+        padding: 24px;
+      }
+
+      .game-area {
+        height: 250px;
+      }
+
+      .movie-options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .stage { min-height: calc(100svh - 80px); }
+      .subtitle { font-size: .88rem; }
+      .panel { padding: 18px; }
+      .fireplace { width: 92%; }
+      .firebox { left: 62px; right: 62px; }
+      .controls { grid-template-columns: 52px 1fr 52px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="top">
+      <p class="eyebrow">Dia dos Namorados</p>
+      <h1>A little warm corner for you.</h1>
+      <p class="subtitle">Cocoa, a tiny game, a cheers, a living fire, flowers for today, and a little movie promise.</p>
+    </header>
+
+    <section class="stage" id="stage" aria-label="Cozy interactive date scene">
+      <div class="room" id="room" aria-hidden="true">
+        <div class="window">
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+        </div>
+
+        <div class="table">
+          <div class="mugs">
+            <div class="mug" id="mugMine">
+              <span class="steam one"></span>
+              <span class="steam two"></span>
+              <span class="mallows"></span>
+              <span class="mug-label">mine</span>
+            </div>
+
+            <div class="mug" id="mugYours">
+              <span class="steam one"></span>
+              <span class="steam two"></span>
+              <span class="mallows"></span>
+              <span class="mug-label">yours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fireplace" id="fireplace">
+          <div class="mantel"></div>
+          <div class="brick"></div>
+          <div class="firebox">
+            <div class="logs"></div>
+            <div class="emberbed"></div>
+            <div class="flame"></div>
+            <div class="flame small"></div>
+          </div>
+
+          <div class="sofa">
+            <div class="blanket"></div>
+            <div class="cuddle">
+              <span class="cuddle-heart">♡</span>
+              <span class="head me"></span>
+              <span class="head her"></span>
+              <span class="cuddle-blanket"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="letter-prop">
+          <span class="lily-seal-small">✿</span>
+        </div>
+      </div>
+
+      <div class="panel-wrap">
+        <section class="panel" id="introPanel">
+          <p class="eyebrow">for today</p>
+          <h2>I made you a little warm corner.</h2>
+          <p>
+            Nothing big. Just something soft, because I didn’t want today to pass without giving you a small piece of care.
+          </p>
+          <button class="button full" id="introBtn" type="button">Come in</button>
+        </section>
+
+        <section class="panel is-hidden" id="gameIntroPanel">
+          <p class="eyebrow">first</p>
+          <h2>Let’s make the cocoa.</h2>
+          <p>
+            Tiny mission: catch the marshmallows for our hot chocolate. Tap inside the box to place the cup under them.
+          </p>
+          <button class="button full" id="gameIntroBtn" type="button">Start the marshmallow game</button>
+        </section>
+
+        <section class="panel is-hidden" id="gamePanel">
+          <p class="eyebrow">mini game</p>
+          <h2>Catch 8 marshmallows.</h2>
+          <p>Tap inside the box to place the cup, or use the arrows. No pressure. Except the marshmallows are falling. So, tiny pressure.</p>
+
+          <div class="game-area" id="gameArea" aria-label="Tap inside this box to move the cup">
+            <div class="game-cup" id="gameCup" aria-hidden="true"></div>
+          </div>
+
+          <div class="controls">
+            <button class="button" id="leftBtn" type="button" aria-label="Move left">←</button>
+            <button class="button" id="restartBtn" type="button">Restart</button>
+            <button class="button" id="rightBtn" type="button" aria-label="Move right">→</button>
+          </div>
+
+          <div class="score-row">
+            <span id="gameStatus">Catch them before they disappear.</span>
+            <strong><span id="score">0</span>/8 caught</strong>
+          </div>
+        </section>
+
+        <section class="panel is-hidden" id="cheersPanel">
+          <p class="eyebrow">cocoa secured</p>
+          <h2>Cheers with me?</h2>
+          <p>
+            Our cups are ready. One tiny clink across the distance.
+          </p>
+          <button class="button full" id="cheersBtn" type="button">Cheers our cups</button>
+        </section>
+
+        <section class="panel is-hidden" id="scrollPanel">
+          <p class="eyebrow">warm now</p>
+          <h2>The fire is alive.</h2>
+          <p>
+            Cups clinked, fire glowing, and now your flower is waiting below.
+          </p>
+          <button class="button full" id="scrollBtn" type="button">Scroll to your flower</button>
+        </section>
+      </div>
+    </section>
+
+    <section class="below" id="flowerArea">
+      <section class="flower-section">
+        <p class="eyebrow">your flowers for today</p>
+        <h2>A lily, because I couldn’t place one in your hands yet.</h2>
+        <p>
+          Let this be the flower for today — not loud, not expensive, just chosen with care.
+        </p>
+
+        <div class="big-lily-wrap" aria-hidden="true">
+          <svg class="big-lily" viewBox="0 0 220 220">
+            <path class="petal-main" d="M110 16 C82 52 84 92 110 126 C136 92 138 52 110 16Z"></path>
+            <path class="petal-side" d="M96 118 C54 80 25 91 18 138 C61 145 88 135 106 121Z"></path>
+            <path class="petal-side" d="M124 118 C166 80 195 91 202 138 C159 145 132 135 114 121Z"></path>
+            <path class="petal-side" d="M108 126 C80 120 64 142 70 176 C94 171 106 150 110 130Z"></path>
+            <path class="petal-side" d="M112 126 C140 120 156 142 150 176 C126 171 114 150 110 130Z"></path>
+            <path class="stem" d="M110 128 C110 150 110 174 110 208"></path>
+            <path class="leaf" d="M110 172 C86 154 60 160 46 185 C75 196 98 189 110 172Z"></path>
+            <path class="leaf" d="M110 178 C136 156 162 163 176 188 C145 199 122 193 110 178Z"></path>
+          </svg>
+        </div>
+
+        <p class="quote">
+          “My precious love, I wish you the best of days. You are special to me, and I want you to know just how much.”
+        </p>
+      </section>
+
+      <section class="letter-section" id="letterSection">
+        <p class="eyebrow">a small letter</p>
+        <h2>Tap the lily seal.</h2>
+        <p>The fire is still going. The cocoa is warm. This part is just my heart being honest.</p>
+
+        <button class="envelope" id="openLetterBtn" type="button" aria-label="Open the letter">
+          <span class="paper"></span>
+          <span class="envelope-flap"></span>
+          <span class="wax">
+            <svg class="tiny-lily" viewBox="0 0 120 120" aria-hidden="true">
+              <path d="M60 16 C47 34 48 52 60 68 C72 52 73 34 60 16Z"></path>
+              <path d="M52 64 C30 48 18 57 16 78 C35 82 49 75 58 67Z"></path>
+              <path d="M68 64 C90 48 102 57 104 78 C85 82 71 75 62 67Z"></path>
+              <path class="stem" d="M60 68 C60 80 60 92 60 104"></path>
+            </svg>
+          </span>
+        </button>
+
+        <article class="letter hidden" id="letterText">
+          
+          <h3>For you</h3>
+          <p>Happy Dia dos Namorados, my love.</p>
+          <p>I know things have not always felt easy lately, but I’m grateful we’ve kept choosing patience, honesty, and each other anyway. That matters to me more than I always know how to say.</p>
+          <p>Thank you for the softness you still gave me, for your letter, your note, and the care behind them. I wanted to return a little piece of that today.</p>
+          <p>I’m saving the bigger surprises for when I see you, but I didn’t want today to pass without leaving you something small and warm. Two cups, a little fire, a blanket, and a letter with my care folded into it.</p>
+          <p>My precious love, I wish you the best of days. You are special to me, and I want you to know just how much. Even from far away, I care about you deeply, and I’m so grateful that I get to keep learning you, choosing you, and looking forward to the day I can hold you properly.</p>
+          <p>Two more months, and then I get to be there with you for real.</p>
+          <p class="signature">Con amor eterno,<br>always yours, Jadon</p>
+        
+        </article>
+      </section>
+
+      <section class="movie-section">
+        <p class="eyebrow">one more thing</p>
+        <h2>Shall we cuddle and watch movies later?</h2>
+        <p>Because today should have something to look forward to, even from far away.</p>
+
+        <div class="movie-options">
+          <button class="button" id="yesMovieBtn" type="button">Yes 😊</button>
+          <button class="button alt" id="obviouslyMovieBtn" type="button">Obviously yes</button>
+        </div>
+
+        <div class="yay" id="yayBox" aria-live="polite">
+          <strong>YAYYYY!</strong>
+          <span class="blush">😊</span>
+          <p>Movie cuddle date unlocked. I’m already looking forward to it.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const target = 8;
+
+    const room = document.querySelector("#room");
+    const stage = document.querySelector("#stage");
+    const fireplace = document.querySelector("#fireplace");
+
+    const panels = {
+      intro: document.querySelector("#introPanel"),
+      gameIntro: document.querySelector("#gameIntroPanel"),
+      game: document.querySelector("#gamePanel"),
+      cheers: document.querySelector("#cheersPanel"),
+      scroll: document.querySelector("#scrollPanel")
+    };
+
+    const introBtn = document.querySelector("#introBtn");
+    const gameIntroBtn = document.querySelector("#gameIntroBtn");
+    const restartBtn = document.querySelector("#restartBtn");
+    const cheersBtn = document.querySelector("#cheersBtn");
+    const scrollBtn = document.querySelector("#scrollBtn");
+
+    const gameArea = document.querySelector("#gameArea");
+    const gameCup = document.querySelector("#gameCup");
+    const leftBtn = document.querySelector("#leftBtn");
+    const rightBtn = document.querySelector("#rightBtn");
+    const gameStatus = document.querySelector("#gameStatus");
+    const scoreEl = document.querySelector("#score");
+
+    const flowerArea = document.querySelector("#flowerArea");
+    const letterSection = document.querySelector("#letterSection");
+    const openLetterBtn = document.querySelector("#openLetterBtn");
+    const letterText = document.querySelector("#letterText");
+
+    const yesMovieBtn = document.querySelector("#yesMovieBtn");
+    const obviouslyMovieBtn = document.querySelector("#obviouslyMovieBtn");
+    const yayBox = document.querySelector("#yayBox");
+
+    let cupX = 0;
+    let caught = 0;
+    let running = false;
+    let spawnTimer = null;
+    let animationFrame = null;
+    let emberTimer = null;
+    let mallows = [];
+    let letterOpened = false;
+    let fireLit = false;
+
+    function showPanel(name) {
+      Object.values(panels).forEach((panel) => panel.classList.add("is-hidden"));
+      panels[name].classList.remove("is-hidden");
+    }
+
+    function centerCup() {
+      if (!gameArea) return;
+      cupX = Math.max(0, (gameArea.clientWidth - 72) / 2);
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function setCupToClientX(clientX) {
+      const rect = gameArea.getBoundingClientRect();
+      cupX = Math.max(0, Math.min(gameArea.clientWidth - 72, clientX - rect.left - 36));
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function moveCup(direction) {
+      const max = gameArea.clientWidth - 72;
+      cupX = Math.max(0, Math.min(max, cupX + direction * 34));
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function clearMallows() {
+      mallows.forEach((m) => m.el.remove());
+      mallows = [];
+    }
+
+    function spawnMallow() {
+      const size = 16 + Math.random() * 6;
+      const el = document.createElement("span");
+      el.className = "falling-mallow";
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+
+      const x = Math.random() * Math.max(1, gameArea.clientWidth - size);
+      const y = -28;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+
+      gameArea.appendChild(el);
+      mallows.push({ el, x, y, size, speed: 2.1 + Math.random() * 1.5 });
+    }
+
+    function updateGame() {
+      const cupTop = gameArea.clientHeight - 16 - 42;
+
+      for (let i = mallows.length - 1; i >= 0; i--) {
+        const m = mallows[i];
+        m.y += m.speed;
+        m.el.style.top = `${m.y}px`;
+
+        const caughtIt =
+          m.y + m.size >= cupTop &&
+          m.y <= cupTop + 42 &&
+          m.x + m.size >= cupX &&
+          m.x <= cupX + 72;
+
+        if (caughtIt) {
+          m.el.remove();
+          mallows.splice(i, 1);
+          caught += 1;
+          scoreEl.textContent = caught;
+          gameStatus.textContent = caught < target ? "Nice. Keep catching." : "Cocoa secured.";
+          sparkAt(gameArea.getBoundingClientRect().left + cupX + 36, gameArea.getBoundingClientRect().bottom - 46, 5);
+
+          if (caught >= target) {
+            winGame();
+            return;
+          }
+          continue;
+        }
+
+        if (m.y > gameArea.clientHeight + 30) {
+          m.el.remove();
+          mallows.splice(i, 1);
+        }
+      }
+
+      if (running) animationFrame = requestAnimationFrame(updateGame);
+    }
+
+    function startGame() {
+      showPanel("game");
+      running = true;
+      caught = 0;
+      scoreEl.textContent = "0";
+      gameStatus.textContent = "Catch them before they disappear.";
+      clearMallows();
+      centerCup();
+
+      clearInterval(spawnTimer);
+      cancelAnimationFrame(animationFrame);
+
+      spawnTimer = setInterval(spawnMallow, 620);
+      updateGame();
+    }
+
+    function winGame() {
+      running = false;
+      clearInterval(spawnTimer);
+      cancelAnimationFrame(animationFrame);
+      clearMallows();
+
+      gameStatus.textContent = "Cozy level unlocked.";
+      sparkAt(window.innerWidth / 2, window.innerHeight / 2, 24);
+
+      setTimeout(() => showPanel("cheers"), 700);
+    }
+
+    function cheersCups() {
+      room.classList.add("is-cheering");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .32, 18);
+
+      setTimeout(() => {
+        room.classList.remove("is-cheering");
+        lightFire();
+        showPanel("scroll");
+      }, 1900);
+    }
+
+    function lightFire() {
+      if (fireLit) return;
+      fireLit = true;
+      room.classList.add("is-lit", "is-cuddled");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .62, 28);
+      startEmbers();
+    }
+
+    function startEmbers() {
+      if (emberTimer) return;
+
+      emberTimer = setInterval(() => {
+        if (!fireLit) return;
+        const rect = fireplace.getBoundingClientRect();
+        const x = rect.left + rect.width / 2 + (Math.random() - .5) * 90;
+        const y = rect.top + rect.height * .55 + (Math.random() - .5) * 20;
+        const ember = document.createElement("span");
+        ember.className = "floating-ember";
+        ember.style.left = `${x}px`;
+        ember.style.top = `${y}px`;
+        ember.style.setProperty("--x", `${(Math.random() - .5) * 80}px`);
+        document.body.appendChild(ember);
+        setTimeout(() => ember.remove(), 2700);
+      }, 700);
+    }
+
+    function openLetter() {
+      if (letterOpened) return;
+      letterOpened = true;
+      letterSection.classList.add("is-open");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .45, 18);
+
+      setTimeout(() => {
+        letterText.classList.remove("hidden");
+        letterText.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 420);
+    }
+
+    function celebrateMovie() {
+      yayBox.classList.add("is-visible");
+      heartConfetti(36);
+      yayBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function sparkAt(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement("span");
+        s.className = "spark";
+        s.style.left = `${x + (Math.random() - .5) * 80}px`;
+        s.style.top = `${y + (Math.random() - .5) * 28}px`;
+        s.style.setProperty("--x", `${(Math.random() - .5) * 120}px`);
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1900);
+      }
+    }
+
+    function heartConfetti(count) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("span");
+        heart.className = "heart-confetti";
+        heart.textContent = Math.random() > .5 ? "♡" : "✦";
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${-20 - Math.random() * 40}px`;
+        heart.style.setProperty("--x", `${(Math.random() - .5) * 160}px`);
+        heart.style.animationDelay = `${Math.random() * .35}s`;
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2800);
+      }
+    }
+
+    introBtn.addEventListener("click", () => showPanel("gameIntro"));
+    gameIntroBtn.addEventListener("click", startGame);
+    restartBtn.addEventListener("click", startGame);
+    leftBtn.addEventListener("click", () => moveCup(-1));
+    rightBtn.addEventListener("click", () => moveCup(1));
+    cheersBtn.addEventListener("click", cheersCups);
+    scrollBtn.addEventListener("click", () => flowerArea.scrollIntoView({ behavior: "smooth", block: "start" }));
+    openLetterBtn.addEventListener("click", openLetter);
+    yesMovieBtn.addEventListener("click", celebrateMovie);
+    obviouslyMovieBtn.addEventListener("click", celebrateMovie);
+
+    gameArea.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      setCupToClientX(event.clientX);
+      gameArea.setPointerCapture(event.pointerId);
+    });
+
+    gameArea.addEventListener("pointermove", (event) => {
+      if (event.pressure === 0 && event.pointerType !== "mouse") return;
+      if (event.buttons || event.pointerType === "touch" || event.pointerType === "pen") {
+        event.preventDefault();
+        setCupToClientX(event.clientX);
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+        event.preventDefault();
+        moveCup(-1);
+      }
+
+      if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+        event.preventDefault();
+        moveCup(1);
+      }
+    });
+
+    window.addEventListener("resize", centerCup);
+    window.addEventListener("load", centerCup);
+  </script>
+</body>
+</html>
