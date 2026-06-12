@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#160d0b" />
+  <title>A little warm corner for you</title>
+
+  <style>
+    :root {
+      --bg: #130c0a;
+      --bg2: #261713;
+      --cream: #fff2dd;
+      --muted: rgba(255, 242, 221, .72);
+      --faint: rgba(255, 242, 221, .12);
+      --line: rgba(255, 242, 221, .16);
+      --wood: #664131;
+      --wood2: #3e261d;
+      --cocoa: #6c4332;
+      --cocoa2: #4a2d23;
+      --fire: #ffb15f;
+      --fire2: #ff7a45;
+      --rose: #d697a4;
+      --blanket: #ad819b;
+      --blanket2: #7c5368;
+      --shadow: rgba(0,0,0,.38);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html {
+      color-scheme: dark;
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 50% 6%, rgba(255, 177, 95, .18), transparent 26rem),
+        radial-gradient(circle at 16% 86%, rgba(214, 151, 164, .12), transparent 20rem),
+        linear-gradient(145deg, var(--bg), var(--bg2) 64%, #0e0908);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.017) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.55), transparent);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100% - 20px, 760px);
+      margin: 0 auto;
+      padding: 18px 0 calc(18px + env(safe-area-inset-bottom));
+    }
+
+    .top {
+      text-align: center;
+      margin: 0 auto 12px;
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .eyebrow {
+      margin: 0 0 7px;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: rgba(255, 242, 221, .58);
+      font-size: .68rem;
+      font-weight: 850;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: .98;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 11vw, 4rem);
+      text-wrap: balance;
+    }
+
+    .subtitle {
+      max-width: 520px;
+      margin: 10px auto 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 79svh;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 53%, rgba(255, 177, 95, .10), transparent 22rem),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      box-shadow: 0 28px 80px var(--shadow);
+      isolation: isolate;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .window {
+      position: absolute;
+      top: 22px;
+      right: 18px;
+      width: 108px;
+      height: 142px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255, 230, 190, .14), transparent 52%),
+        linear-gradient(180deg, #18131e, #09080f);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 18px 42px rgba(0,0,0,.20);
+      overflow: hidden;
+    }
+
+    .window::before,
+    .window::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 242, 221, .12);
+    }
+
+    .window::before { width: 1px; height: 100%; left: 50%; top: 0; }
+    .window::after { height: 1px; width: 100%; left: 0; top: 50%; }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--cream);
+      opacity: .8;
+      box-shadow: 0 0 14px rgba(255,255,255,.55);
+      animation: twinkle 3.5s ease-in-out infinite;
+    }
+
+    .star:nth-child(1) { left: 24%; top: 18%; }
+    .star:nth-child(2) { left: 72%; top: 30%; animation-delay: .6s; }
+    .star:nth-child(3) { left: 34%; top: 68%; animation-delay: 1.2s; }
+    .star:nth-child(4) { left: 78%; top: 74%; animation-delay: 1.8s; }
+
+    .table {
+      position: absolute;
+      left: 50%;
+      top: 188px;
+      width: min(330px, 86%);
+      height: 112px;
+      transform: translateX(-50%);
+      border-radius: 34px 34px 22px 22px;
+      background: linear-gradient(180deg, #704938, var(--wood));
+      box-shadow: inset 0 -16px 26px rgba(0,0,0,.16), 0 24px 54px rgba(0,0,0,.20);
+    }
+
+    .mugs {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      transform: translateY(-22px);
+    }
+
+    .mug {
+      position: relative;
+      width: 76px;
+      height: 62px;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(180deg, #95644d, #6c4534);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: inset 0 -10px 18px rgba(0,0,0,.18);
+    }
+
+    .mug::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      right: 7px;
+      height: 17px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--cocoa), var(--cocoa2));
+    }
+
+    .mug::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      right: -15px;
+      width: 22px;
+      height: 30px;
+      border-radius: 999px;
+      border: 5px solid #95644d;
+    }
+
+    .mug-label {
+      position: absolute;
+      top: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 242, 221, .62);
+      font-size: .78rem;
+      white-space: nowrap;
+    }
+
+    .mallows {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      width: 52px;
+      height: 16px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(circle at 15% 50%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 40% 42%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 64% 58%, #fffaf0 0 7px, transparent 8px),
+        radial-gradient(circle at 86% 40%, #fffaf0 0 6px, transparent 7px);
+      z-index: 2;
+    }
+
+    .steam {
+      position: absolute;
+      top: -34px;
+      width: 22px;
+      height: 46px;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 242, 221, .24);
+      border-color: rgba(255, 242, 221, .24) transparent transparent transparent;
+      animation: steam 3.6s ease-in-out infinite;
+    }
+
+    .steam.one { left: 20px; }
+    .steam.two { right: 18px; animation-delay: .9s; }
+
+    .fireplace {
+      position: absolute;
+      left: 50%;
+      top: 332px;
+      width: min(340px, 86%);
+      height: 226px;
+      transform: translateX(-50%);
+    }
+
+    .mantel {
+      position: absolute;
+      top: 0;
+      left: 14px;
+      right: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #6d4a3b, #422920);
+    }
+
+    .brick {
+      position: absolute;
+      top: 14px;
+      left: 34px;
+      right: 34px;
+      bottom: 42px;
+      border-radius: 26px 26px 18px 18px;
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,.03) 50%, transparent 51%),
+        linear-gradient(180deg, #5b3b31, #34211c);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 -20px 28px rgba(0,0,0,.20);
+    }
+
+    .firebox {
+      position: absolute;
+      top: 62px;
+      left: 72px;
+      right: 72px;
+      bottom: 75px;
+      border-radius: 20px 20px 14px 14px;
+      background: #17100f;
+      border: 1px solid rgba(255,255,255,.06);
+      overflow: hidden;
+      transition: box-shadow .4s ease, background .4s ease;
+    }
+
+    .logs {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      width: 92px;
+      height: 22px;
+      transform: translateX(-50%);
+    }
+
+    .logs::before,
+    .logs::after {
+      content: "";
+      position: absolute;
+      width: 58px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7b543c, #493025);
+    }
+
+    .logs::before { left: 0; transform: rotate(13deg); }
+    .logs::after { right: 0; transform: rotate(-13deg); }
+
+    .flame {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      width: 38px;
+      height: 70px;
+      transform: translateX(-50%) scale(.8);
+      opacity: 0;
+      border-radius: 55% 55% 55% 55% / 72% 72% 38% 38%;
+      background: radial-gradient(circle at 50% 78%, #fff2ce 0 18%, #ffc76d 20% 46%, #ff8b4a 50% 72%, transparent 76%);
+      transition: opacity .45s ease, transform .45s ease;
+      animation: flicker 1.7s ease-in-out infinite;
+    }
+
+    .flame.small {
+      left: calc(50% + 18px);
+      bottom: 38px;
+      width: 28px;
+      height: 50px;
+      animation-delay: .18s;
+    }
+
+    .sofa {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 230px;
+      height: 82px;
+      border-radius: 32px 32px 18px 18px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #684439, #402922);
+      box-shadow: 0 20px 48px rgba(0,0,0,.18);
+    }
+
+    .blanket {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      width: 158px;
+      height: 60px;
+      border-radius: 22px 22px 18px 18px;
+      transform: translateX(-50%) translateY(14px);
+      background: linear-gradient(180deg, var(--blanket), var(--blanket2));
+      opacity: 0;
+      transition: opacity .45s ease, transform .45s ease;
+      box-shadow: inset 0 -10px 18px rgba(0,0,0,.14);
+    }
+
+    .cuddle {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      width: 156px;
+      height: 66px;
+      transform: translateX(-50%) translateY(10px);
+      opacity: 0;
+      transition: opacity .45s ease, transform .45s ease;
+      z-index: 2;
+    }
+
+    .head {
+      position: absolute;
+      top: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #d2a17f, #a97455);
+      box-shadow: inset 0 -8px 14px rgba(0,0,0,.10);
+    }
+
+    .head.me { left: 36px; }
+    .head.her { right: 36px; background: linear-gradient(180deg, #c98f76, #8f5c4d); }
+
+    .cuddle-blanket {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 148px;
+      height: 48px;
+      border-radius: 24px 24px 18px 18px;
+      transform: translateX(-50%);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.08) 0 12%, transparent 12% 24%, rgba(255,255,255,.08) 24% 36%, transparent 36% 48%, rgba(255,255,255,.08) 48% 60%, transparent 60% 72%, rgba(255,255,255,.08) 72% 84%, transparent 84%),
+        linear-gradient(180deg, #b68ba2, #7e566d);
+    }
+
+    .cuddle-heart {
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      transform: translateX(-50%);
+      color: #ffd7d7;
+      font-size: 1.05rem;
+      opacity: 0;
+    }
+
+    .room.is-lit .firebox {
+      background: radial-gradient(circle at 50% 100%, rgba(255, 151, 75, .18), transparent 70%), #1b1110;
+      box-shadow: inset 0 0 84px rgba(255, 139, 74, .15), 0 0 70px rgba(255, 139, 74, .12);
+    }
+
+    .room.is-lit .flame {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .room.is-lit .blanket {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .room.is-cuddled .cuddle {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .room.is-cuddled .cuddle-heart {
+      animation: heartFloat 2.4s ease-in-out infinite;
+    }
+
+    .letter-prop {
+      position: absolute;
+      left: 18px;
+      top: 74px;
+      width: 104px;
+      height: 72px;
+      transform: rotate(-7deg);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f7ead8, #e6ceb2);
+      box-shadow: 0 16px 34px rgba(0,0,0,.22);
+      opacity: .9;
+    }
+
+    .letter-prop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      background: #ead7bd;
+      border-radius: 14px 14px 0 0;
+    }
+
+    .lily-seal-small {
+      position: absolute;
+      left: 50%;
+      top: 23px;
+      width: 31px;
+      height: 31px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #b87986, #8e5360);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      color: #fff9f1;
+      z-index: 2;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: end center;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 50% 56%, rgba(20, 13, 11, .12), rgba(20, 13, 11, .60)),
+        linear-gradient(180deg, rgba(20,13,11,.12), rgba(20,13,11,.88));
+      transition: opacity .45s ease, transform .45s ease;
+      z-index: 20;
+    }
+
+    .overlay.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.02);
+    }
+
+    .welcome-card,
+    .panel {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(20, 13, 11, .74);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 70px rgba(0,0,0,.34);
+    }
+
+    .welcome-card {
+      text-align: center;
+      margin-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+
+    .welcome-card h2,
+    .panel h2 {
+      font-size: clamp(2rem, 9vw, 3.5rem);
+      text-wrap: balance;
+    }
+
+    .welcome-card p,
+    .panel p,
+    .letter p {
+      color: var(--muted);
+      line-height: 1.58;
+      margin: 13px auto 0;
+      font-size: .96rem;
+    }
+
+    .button {
+      appearance: none;
+      border: 1px solid rgba(255, 194, 135, .30);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 194, 135, .22), rgba(255, 194, 135, .10));
+      color: var(--cream);
+      min-height: 48px;
+      padding: 13px 17px;
+      font-weight: 780;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, opacity .2s ease;
+      box-shadow: 0 14px 30px rgba(0,0,0,.16);
+      touch-action: manipulation;
+    }
+
+    .button:hover:not(:disabled),
+    .button:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(255, 194, 135, .52);
+    }
+
+    .button:disabled {
+      opacity: .48;
+      cursor: not-allowed;
+    }
+
+    .welcome-card .button,
+    .panel > .button {
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    .panel-wrap {
+      position: absolute;
+      inset: auto 12px 12px;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .panel {
+      pointer-events: auto;
+      max-height: 58svh;
+      overflow-y: auto;
+      transform: translateY(0);
+      opacity: 1;
+      transition: opacity .35s ease, transform .35s ease;
+      scrollbar-width: thin;
+    }
+
+    .panel.is-hidden {
+      opacity: 0;
+      transform: translateY(16px);
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+
+    .game-area {
+      position: relative;
+      height: min(34svh, 245px);
+      min-height: 210px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 242, 221, .08), transparent 65%),
+        linear-gradient(180deg, #1e1514, #120d0d);
+      margin-top: 14px;
+      touch-action: none;
+    }
+
+    .game-cup {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      width: 72px;
+      height: 42px;
+      border-radius: 0 0 16px 16px;
+      background: linear-gradient(180deg, #95654e, #704937);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .game-cup::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: 4px;
+      right: 4px;
+      height: 8px;
+      border-radius: 999px;
+      background: #fff8ed;
+    }
+
+    .game-cup::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: -13px;
+      width: 19px;
+      height: 22px;
+      border-radius: 999px;
+      border: 4px solid #95654e;
+    }
+
+    .falling-mallow {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #fffdf7, #f4eadc);
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,.06);
+      will-change: transform;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 58px 1fr 58px;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .92rem;
+      flex-wrap: wrap;
+    }
+
+    .score-row strong {
+      color: var(--cream);
+    }
+
+    .letter-panel {
+      text-align: center;
+    }
+
+    .envelope-button {
+      position: relative;
+      width: min(260px, 100%);
+      height: 168px;
+      margin: 18px auto 4px;
+      border: 0;
+      padding: 0;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #f7ead8, #e6ceb2);
+      box-shadow: 0 20px 45px rgba(0,0,0,.22);
+      cursor: pointer;
+      transition: transform .2s ease;
+      display: block;
+      touch-action: manipulation;
+    }
+
+    .envelope-button:hover,
+    .envelope-button:focus-visible {
+      transform: translateY(-3px);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 58%);
+      border-radius: 24px 24px 0 0;
+      background: #ead7bd;
+      transform-origin: top center;
+      transition: transform .55s ease;
+      z-index: 3;
+    }
+
+    .paper {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 28px;
+      bottom: 18px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffaf1, #f6ebda);
+      transform: translateY(16px);
+      transition: transform .55s ease;
+      z-index: 1;
+    }
+
+    .lily-seal {
+      position: absolute;
+      left: 50%;
+      top: 54px;
+      width: 64px;
+      height: 64px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b87986, #8e5360);
+      display: grid;
+      place-items: center;
+      z-index: 4;
+      box-shadow: 0 12px 22px rgba(0,0,0,.18);
+      animation: pulse 2.2s ease-in-out infinite;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+
+    .lily {
+      width: 44px;
+      height: 44px;
+      overflow: visible;
+    }
+
+    .lily path {
+      fill: #fff8ee;
+      stroke: rgba(255,255,255,.68);
+      stroke-width: 2.2;
+      stroke-linejoin: round;
+    }
+
+    .lily .stem {
+      fill: none;
+      stroke: #fff8ee;
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+
+    .tap-note {
+      position: absolute;
+      left: 50%;
+      bottom: -34px;
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 240px;
+      color: rgba(255, 242, 221, .74);
+      font-size: .76rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .letter-open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .letter-open .paper {
+      transform: translateY(-36px);
+    }
+
+    .letter-open .lily-seal {
+      animation: none;
+      opacity: .82;
+      transform: translateX(-50%) scale(.88);
+    }
+
+    .letter {
+      margin-top: 48px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 22px;
+      padding: 20px;
+      background: rgba(255, 242, 221, .08);
+      color: var(--muted);
+      line-height: 1.62;
+    }
+
+    .letter h3 {
+      color: var(--cream);
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .signature {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--cream) !important;
+      font-size: 1.22rem !important;
+      margin-top: 18px !important;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .spark {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 202, 109, .92);
+      box-shadow: 0 0 14px rgba(255, 202, 109, .45);
+      z-index: 50;
+      pointer-events: none;
+      animation: spark 1.8s ease-out forwards;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .42; transform: scale(.9); }
+      50% { opacity: 1; transform: scale(1.22); }
+    }
+
+    @keyframes steam {
+      0%, 100% { opacity: .16; transform: translateY(10px) scale(.96); }
+      50% { opacity: .36; transform: translateY(-8px) scale(1.04); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { filter: saturate(1); }
+      50% { filter: saturate(1.15); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 12px 22px rgba(0,0,0,.18), 0 0 0 0 rgba(255, 248, 238, .18); }
+      50% { box-shadow: 0 12px 22px rgba(0,0,0,.18), 0 0 0 12px rgba(255, 248, 238, 0); }
+    }
+
+    @keyframes heartFloat {
+      0%, 100% { opacity: .15; transform: translateX(-50%) translateY(6px) scale(.92); }
+      50% { opacity: .94; transform: translateX(-50%) translateY(-8px) scale(1.08); }
+    }
+
+    @keyframes spark {
+      0% { opacity: 1; transform: translate3d(0,0,0) scale(1); }
+      100% { opacity: 0; transform: translate3d(var(--x), -130px, 0) scale(0); }
+    }
+
+    @media (min-width: 700px) {
+      .page {
+        width: min(1120px, calc(100% - 34px));
+        padding-top: 34px;
+      }
+
+      .stage {
+        min-height: 720px;
+      }
+
+      .window {
+        width: 156px;
+        height: 204px;
+        right: 56px;
+        top: 34px;
+      }
+
+      .table {
+        top: 250px;
+        width: min(540px, 82%);
+        height: 146px;
+      }
+
+      .mugs {
+        gap: 92px;
+        transform: translateY(-28px);
+      }
+
+      .mug {
+        width: 110px;
+        height: 84px;
+        border-radius: 0 0 28px 28px;
+      }
+
+      .mug::before {
+        height: 22px;
+        left: 9px;
+        right: 9px;
+      }
+
+      .mug::after {
+        top: 20px;
+        right: -20px;
+        width: 30px;
+        height: 44px;
+        border-width: 6px;
+      }
+
+      .mallows {
+        width: 70px;
+        height: 22px;
+      }
+
+      .mug-label {
+        top: 96px;
+        font-size: .88rem;
+      }
+
+      .fireplace {
+        top: auto;
+        bottom: 55px;
+        width: min(470px, 86%);
+        height: 270px;
+      }
+
+      .firebox {
+        top: 66px;
+        left: 94px;
+        right: 94px;
+        bottom: 72px;
+      }
+
+      .sofa {
+        width: 270px;
+        height: 92px;
+      }
+
+      .blanket {
+        width: 178px;
+        height: 68px;
+      }
+
+      .cuddle {
+        bottom: 28px;
+      }
+
+      .letter-prop {
+        left: 62px;
+        top: auto;
+        bottom: 104px;
+        width: 164px;
+        height: 108px;
+      }
+
+      .lily-seal-small {
+        top: 36px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+      }
+
+      .overlay {
+        place-items: center;
+      }
+
+      .welcome-card {
+        max-width: 560px;
+        margin: 0;
+        padding: 38px;
+      }
+
+      .welcome-card .button {
+        width: min(280px, 100%);
+      }
+
+      .panel-wrap {
+        inset: 28px auto auto 28px;
+        width: min(410px, calc(100% - 56px));
+      }
+
+      .panel {
+        max-height: calc(720px - 56px);
+        padding: 24px;
+      }
+
+      .game-area {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .stage { min-height: 80svh; }
+      .top .subtitle { font-size: .9rem; }
+      .welcome-card, .panel { padding: 18px; }
+      .fireplace { width: 92%; }
+      .firebox { left: 62px; right: 62px; }
+      .controls { grid-template-columns: 52px 1fr 52px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="top">
+      <p class="eyebrow">Dia dos Namorados</p>
+      <h1>A little warm corner for you.</h1>
+      <p class="subtitle">
+        Cozy cocoa, a tiny game, a fireplace, a cuddle, and a letter sealed with a lily.
+      </p>
+    </header>
+
+    <section class="stage room" id="room" aria-label="A cozy digital date scene">
+      <div class="scene" aria-hidden="true">
+        <div class="window">
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+          <span class="star"></span>
+        </div>
+
+        <div class="table">
+          <div class="mugs">
+            <div class="mug">
+              <span class="steam one"></span>
+              <span class="steam two"></span>
+              <span class="mallows"></span>
+              <span class="mug-label">mine</span>
+            </div>
+
+            <div class="mug">
+              <span class="steam one"></span>
+              <span class="steam two"></span>
+              <span class="mallows"></span>
+              <span class="mug-label">yours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fireplace">
+          <div class="mantel"></div>
+          <div class="brick"></div>
+          <div class="firebox">
+            <div class="logs"></div>
+            <div class="flame"></div>
+            <div class="flame small"></div>
+          </div>
+
+          <div class="sofa">
+            <div class="blanket"></div>
+            <div class="cuddle">
+              <span class="cuddle-heart">♡</span>
+              <span class="head me"></span>
+              <span class="head her"></span>
+              <span class="cuddle-blanket"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="letter-prop">
+          <span class="lily-seal-small">✿</span>
+        </div>
+      </div>
+
+      <section class="overlay" id="welcome">
+        <article class="welcome-card">
+          <p class="eyebrow">for today</p>
+          <h2>I made you a little warm corner.</h2>
+          <p>
+            Nothing big. Just something soft, because I didn’t want today to pass
+            without giving you a small piece of care.
+          </p>
+          <button class="button" id="startDateBtn" type="button">Start our little date</button>
+        </article>
+      </section>
+
+      <div class="panel-wrap">
+        <section class="panel is-hidden" id="gamePanel" aria-labelledby="gameTitle">
+          <p class="eyebrow">step one</p>
+          <h2 id="gameTitle">Catch marshmallows for our cocoa.</h2>
+          <p>Drag the cup or use the arrows. Catch <strong>8</strong> mini marshmallows to unlock the fireplace.</p>
+
+          <div class="game-area" id="gameArea">
+            <div class="game-cup" id="gameCup" aria-hidden="true"></div>
+          </div>
+
+          <div class="controls">
+            <button class="button" id="leftBtn" type="button" aria-label="Move left">←</button>
+            <button class="button" id="startGameBtn" type="button">Start</button>
+            <button class="button" id="rightBtn" type="button" aria-label="Move right">→</button>
+          </div>
+
+          <div class="score-row">
+            <span id="gameStatus">Ready when you are.</span>
+            <strong><span id="score">0</span>/8 caught</strong>
+          </div>
+        </section>
+
+        <section class="panel is-hidden" id="firePanel" aria-labelledby="fireTitle">
+          <p class="eyebrow">step two</p>
+          <h2 id="fireTitle">Now light the fire.</h2>
+          <p>The cocoa is ready. Warm the room a little more.</p>
+          <button class="button" id="lightFireBtn" type="button">Light the fire</button>
+        </section>
+
+        <section class="panel is-hidden" id="cuddlePanel" aria-labelledby="cuddleTitle">
+          <p class="eyebrow">step three</p>
+          <h2 id="cuddleTitle">Cuddle up for a second.</h2>
+          <p>
+            If I was there, this is the part where I’d pull the blanket over us
+            and let the quiet do some of the talking.
+          </p>
+          <button class="button" id="cuddleBtn" type="button">Wrap us in the blanket</button>
+        </section>
+
+        <section class="panel letter-panel is-hidden" id="letterPanel" aria-labelledby="letterTitle">
+          <p class="eyebrow">step four</p>
+          <h2 id="letterTitle">Tap the lily seal.</h2>
+          <p id="lilyLine">A small lily for the softness you gave me.</p>
+
+          <button class="envelope-button" id="openLetterBtn" type="button" aria-label="Open the letter">
+            <span class="paper"></span>
+            <span class="envelope-flap"></span>
+            <span class="lily-seal">
+              <svg class="lily" viewBox="0 0 120 120" aria-hidden="true">
+                <path d="M60 16 C47 34 48 52 60 68 C72 52 73 34 60 16Z"></path>
+                <path d="M52 64 C30 48 18 57 16 78 C35 82 49 75 58 67Z"></path>
+                <path d="M68 64 C90 48 102 57 104 78 C85 82 71 75 62 67Z"></path>
+                <path class="stem" d="M60 68 C60 80 60 92 60 104"></path>
+              </svg>
+            </span>
+            <span class="tap-note">tap the lily</span>
+          </button>
+
+          <article class="letter hidden" id="letterText">
+            <h3>For you</h3>
+            <p>Happy Dia dos Namorados, my love.</p>
+            <p>
+              I know things have not always felt easy lately, but I’m grateful we’ve kept choosing
+              patience, honesty, and each other anyway. That matters to me more than I always know how to say.
+            </p>
+            <p>
+              Thank you for the softness you still gave me — for your letter, your note, and the care behind them.
+              I wanted to return a little piece of that today.
+            </p>
+            <p>
+              I’m saving the bigger surprises for when I see you, but I didn’t want today to pass without leaving
+              you something small and warm. Two cups, a little fire, a blanket, and a letter with my care folded into it.
+            </p>
+            <p>
+              My precious love, I wish you the best of days. You are special to me, and I want you to know just how much.
+              Even from far away, I care about you deeply, and I’m so grateful that I get to keep learning you, choosing you,
+              and looking forward to the day I can hold you properly.
+            </p>
+            <p>Two more months, and then I get to be there with you for real.</p>
+            <p class="signature">With love,<br>me</p>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const target = 8;
+
+    const welcome = document.querySelector("#welcome");
+    const startDateBtn = document.querySelector("#startDateBtn");
+    const gamePanel = document.querySelector("#gamePanel");
+    const firePanel = document.querySelector("#firePanel");
+    const cuddlePanel = document.querySelector("#cuddlePanel");
+    const letterPanel = document.querySelector("#letterPanel");
+    const room = document.querySelector("#room");
+
+    const gameArea = document.querySelector("#gameArea");
+    const gameCup = document.querySelector("#gameCup");
+    const startGameBtn = document.querySelector("#startGameBtn");
+    const leftBtn = document.querySelector("#leftBtn");
+    const rightBtn = document.querySelector("#rightBtn");
+    const gameStatus = document.querySelector("#gameStatus");
+    const scoreEl = document.querySelector("#score");
+
+    const lightFireBtn = document.querySelector("#lightFireBtn");
+    const cuddleBtn = document.querySelector("#cuddleBtn");
+    const openLetterBtn = document.querySelector("#openLetterBtn");
+    const letterPanelEl = document.querySelector("#letterPanel");
+    const letterText = document.querySelector("#letterText");
+    const lilyLine = document.querySelector("#lilyLine");
+
+    let cupX = 0;
+    let caught = 0;
+    let running = false;
+    let spawnTimer = null;
+    let animationFrame = null;
+    let mallows = [];
+    let letterOpened = false;
+
+    function show(panel) {
+      [gamePanel, firePanel, cuddlePanel, letterPanel].forEach((p) => p.classList.add("is-hidden"));
+      panel.classList.remove("is-hidden");
+    }
+
+    function centerCup() {
+      if (!gameArea) return;
+      cupX = Math.max(0, (gameArea.clientWidth - 72) / 2);
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function setCupToClientX(clientX) {
+      const rect = gameArea.getBoundingClientRect();
+      cupX = Math.max(0, Math.min(gameArea.clientWidth - 72, clientX - rect.left - 36));
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function moveCup(direction) {
+      const max = gameArea.clientWidth - 72;
+      cupX = Math.max(0, Math.min(max, cupX + direction * 34));
+      gameCup.style.left = `${cupX}px`;
+    }
+
+    function clearMallows() {
+      mallows.forEach((m) => m.el.remove());
+      mallows = [];
+    }
+
+    function spawnMallow() {
+      const size = 16 + Math.random() * 6;
+      const el = document.createElement("span");
+      el.className = "falling-mallow";
+      el.style.width = `${size}px`;
+      el.style.height = `${size}px`;
+
+      const x = Math.random() * Math.max(1, gameArea.clientWidth - size);
+      const y = -28;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+
+      gameArea.appendChild(el);
+      mallows.push({ el, x, y, size, speed: 2.1 + Math.random() * 1.5 });
+    }
+
+    function updateGame() {
+      const cupTop = gameArea.clientHeight - 16 - 42;
+
+      for (let i = mallows.length - 1; i >= 0; i--) {
+        const m = mallows[i];
+        m.y += m.speed;
+        m.el.style.top = `${m.y}px`;
+
+        const caughtIt =
+          m.y + m.size >= cupTop &&
+          m.y <= cupTop + 42 &&
+          m.x + m.size >= cupX &&
+          m.x <= cupX + 72;
+
+        if (caughtIt) {
+          m.el.remove();
+          mallows.splice(i, 1);
+          caught += 1;
+          scoreEl.textContent = caught;
+          gameStatus.textContent = caught < target ? "Nice. Keep catching." : "Cocoa secured.";
+          sparkAt(gameArea.getBoundingClientRect().left + cupX + 36, gameArea.getBoundingClientRect().bottom - 46, 5);
+
+          if (caught >= target) {
+            winGame();
+            return;
+          }
+          continue;
+        }
+
+        if (m.y > gameArea.clientHeight + 30) {
+          m.el.remove();
+          mallows.splice(i, 1);
+        }
+      }
+
+      if (running) animationFrame = requestAnimationFrame(updateGame);
+    }
+
+    function startGame() {
+      running = true;
+      caught = 0;
+      scoreEl.textContent = "0";
+      gameStatus.textContent = "Catch them before they disappear.";
+      clearMallows();
+      centerCup();
+
+      clearInterval(spawnTimer);
+      cancelAnimationFrame(animationFrame);
+
+      spawnTimer = setInterval(spawnMallow, 620);
+      updateGame();
+
+      startGameBtn.textContent = "Restart";
+    }
+
+    function winGame() {
+      running = false;
+      clearInterval(spawnTimer);
+      cancelAnimationFrame(animationFrame);
+      clearMallows();
+
+      gameStatus.textContent = "Cozy level unlocked.";
+      sparkAt(window.innerWidth / 2, window.innerHeight / 2, 24);
+
+      setTimeout(() => show(firePanel), 750);
+    }
+
+    function lightFire() {
+      room.classList.add("is-lit");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .62, 28);
+      setTimeout(() => show(cuddlePanel), 700);
+    }
+
+    function cuddleUp() {
+      room.classList.add("is-cuddled");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .64, 20);
+      setTimeout(() => show(letterPanel), 800);
+    }
+
+    function openLetter() {
+      if (letterOpened) return;
+      letterOpened = true;
+      letterPanelEl.classList.add("letter-open");
+      lilyLine.textContent = "A small lily for the softness you gave me.";
+      openLetterBtn.setAttribute("aria-label", "The letter is open");
+      sparkAt(window.innerWidth / 2, window.innerHeight * .45, 18);
+
+      setTimeout(() => {
+        letterText.classList.remove("hidden");
+        letterText.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 420);
+    }
+
+    function sparkAt(x, y, count) {
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement("span");
+        s.className = "spark";
+        s.style.left = `${x + (Math.random() - .5) * 80}px`;
+        s.style.top = `${y + (Math.random() - .5) * 28}px`;
+        s.style.setProperty("--x", `${(Math.random() - .5) * 120}px`);
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 1900);
+      }
+    }
+
+    startDateBtn.addEventListener("click", () => {
+      welcome.classList.add("is-hidden");
+      show(gamePanel);
+      setTimeout(centerCup, 80);
+    });
+
+    startGameBtn.addEventListener("click", startGame);
+    leftBtn.addEventListener("click", () => moveCup(-1));
+    rightBtn.addEventListener("click", () => moveCup(1));
+    lightFireBtn.addEventListener("click", lightFire);
+    cuddleBtn.addEventListener("click", cuddleUp);
+    openLetterBtn.addEventListener("click", openLetter);
+
+    gameArea.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      setCupToClientX(event.clientX);
+      gameArea.setPointerCapture(event.pointerId);
+    });
+
+    gameArea.addEventListener("pointermove", (event) => {
+      if (event.pressure === 0 && event.pointerType !== "mouse") return;
+      if (event.buttons || event.pointerType === "touch" || event.pointerType === "pen") {
+        event.preventDefault();
+        setCupToClientX(event.clientX);
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft" || event.key.toLowerCase() === "a") {
+        event.preventDefault();
+        moveCup(-1);
+      }
+
+      if (event.key === "ArrowRight" || event.key.toLowerCase() === "d") {
+        event.preventDefault();
+        moveCup(1);
+      }
+    });
+
+    window.addEventListener("resize", centerCup);
+    window.addEventListener("load", centerCup);
+  </script>
+</body>
+</html>
